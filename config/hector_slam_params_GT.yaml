@@ -1,0 +1,24 @@
+# Hector SLAM params:
+base_frame: base_link
+map_frame: map
+odom_frame: odom
+
+map_resolution: 0.05                          # Consider
+map_size: 1024                                # Consider
+map_start_x: 0.5
+map_start_y: 0.5
+map_update_distance_thresh: 0.2
+map_update_angle_thresh: 0.5
+map_pub_period: 2
+map_multi_res_levels: 3                       # Consider
+update_factor_free: 0.4                       # Used in optimization
+update_factor_occupied: 0.9                   # Used in optimization
+laser_min_dist: 0.02
+laser_max_dist: 1.5
+laser_z_min_value: -1.0
+laser_z_max_value: 1.0
+pub_map_odom_transform: true
+output_timing: false
+scan_subscriber_queue_size: 50
+pub_map_scanmatch_transform: true
+tf_map_scanmatch_transform_frame_name: scanmatcher_frame

@@ -1,0 +1,70 @@
+<launch>
+    
+    <arg name="initial_pos_x" default="-1.5" />
+    <arg name="initial_pos_y" default="1.5" />
+    <arg name="initial_pos_a" default="0.0" />
+    <!--<arg name="z_pos" default="0.0" />-->
+    <arg name="mapfile" default="Maze_small" />
+
+
+    <!-- Parameters -->
+    <param name="initial_pos_x" value="$(arg initial_pos_x)" />
+    <param name="initial_pos_y" value="$(arg initial_pos_y)" />
+    <param name="initial_pos_a" value="$(arg initial_pos_a)" />
+
+
+    <!-- GMapping -->
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping">
+        <rosparam command="load" file="$(find simple_robot_driving)/config/gmapping_params.yaml" />
+        <!--<rosparam command="load" file="$(find simple_robot_driving)/config/gmapping_params_GT.yaml" />-->
+    </node>
+    <!--<node pkg="iris_lama_ros" type="pf_slam2d_ros" name="lama_pf_slam2d" output="screen">
+        <rosparam command="load" file="$(find simple_robot_driving)/config/lama_pf_params.yaml" />
+    </node>-->
+    <!-- SLAM Toolbox -->
+    <!--<node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox_async" output="screen">
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam_toolbox_params.yaml" />
+        <param name="/use_sim_time" value="true" />
+    </node>-->
+    
+
+    <!-- Rviz -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/robot_configuration.rviz" />
+
+
+    <!-- Gazebo interface -->
+    <node pkg="simple_robot_driving" type="gazebo_interface.py" name="gazebo_interface" output="screen" />
+
+
+    <!-- Simulator -->
+    <node pkg="simple_robot_simulator" type="simulator.py" name="simulator" output="screen">
+    <!--<node pkg="simple_robot_simulator" type="simulator_GT.py" name="simulator" output="screen">-->
+        <param name="mapfile" value="$(find simple_robot_simulator)/worlds/$(arg mapfile)/model.sdf" />
+    </node>
+
+
+    <!-- move_base -->
+    <!-- move_base node is used to find the trajectory (path) to the goal.
+         The goal will be published to the make_plan service. It will then return the path, which will be used to drive the robot. -->
+    <!--<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+	    <rosparam file="$(find simple_robot_driving)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+	    <rosparam file="$(find simple_robot_driving)/config/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find simple_robot_driving)/config/move_base_params.yaml" command="load" />-->
+	    <!--<rosparam file="$(find simple_robot_driving)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />-->
+	    <!--<rosparam file="$(find simple_robot_driving)/config/local_costmap_params.yaml" command="load" />-->
+		<!--<rosparam file="$(find simple_robot_driving)/config/global_planner_params.yaml" command="load" />-->
+	    <!--<rosparam file="$(find simple_robot_driving)/config/base_local_planner_params.yaml" command="load" />-->
+	<!--</node>-->
+
+      <!-- move_base -->
+    <!--<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
+        <rosparam file="$(find turtlebot3_navigation)/param/costmap_common_params_burger.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find turtlebot3_navigation)/param/costmap_common_params_burger.yaml" command="load" ns="local_costmap" />
+        <rosparam file="$(find turtlebot3_navigation)/param/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find turtlebot3_navigation)/param/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find turtlebot3_navigation)/param/move_base_params.yaml" command="load" />
+        <rosparam file="$(find turtlebot3_navigation)/param/dwa_local_planner_params_burger.yaml" command="load" />
+    </node>-->
+
+</launch>

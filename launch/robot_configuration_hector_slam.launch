@@ -1,0 +1,20 @@
+<launch>
+
+    <!-- Robot interface -->
+    <!--<node pkg="simple_robot_driving" type="robot_interface.py" name="robot_interface" output="screen"/>-->
+
+
+    <!-- tf base_link to laser_frame transform -->
+    <!--<node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher" output="screen" args="0 0 0 0 0 0 base_link laser_frame"/>-->
+
+
+    <!-- Hector SLAM -->
+    <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
+        <rosparam command="load" file="$(find simple_robot_driving)/config/hector_slam_params.yaml" />
+    </node>
+    
+
+    <!-- Rviz -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/robot_configuration.rviz" />
+
+</launch>

@@ -1,0 +1,59 @@
+# SLAM Toolbox params:
+
+# ROS Parameters
+odom_frame: odom
+map_frame: map
+base_frame: base_link
+scan_topic: /scan
+
+# Plugin Parameters
+solver_plugin: solver_plugins::CeresSolver              # Consider
+ceres_linear_solver: SPARSE_NORMAL_CHOLESKY             # Consider
+ceres_preconditioner: JACOBI                            # Consider
+ceres_trust_strategy: LEVENBERG_MARQUARDT               # Consider
+ceres_dogleg_type: TRADITIONAL_DOGLEG                   # Consider
+ceres_loss_function: None                               # Consider
+mode: mapping
+
+# Toolbox Parameters
+debug_logging: false
+throttle_scans: 1
+transform_publish_period: 0.02                          # Consider
+map_update_interval: 2.0                                # Consider
+enable_interactive_mode: false                          # Can be true while debugging!
+resolution: 0.025                                       # Consider
+max_laser_range: 1.5                                    # Consider
+minimum_time_interval: 0.2                              # Consider
+transform_timeout: 0.2                                  # Consider
+tf_buffer_duration: 30000000                            # Consider
+stack_size_to_use: 40000000                             # Consider
+minimum_travel_distance: 0.1                            # Consider
+
+# Matcher Parameters
+use_scan_matching: true
+use_scan_barycenter: true                               # Consider
+minimum_travel_heading: 0.5                             # Consider
+scan_buffer_size: 10                                    # Consider
+scan_buffer_maximum_scan_distance: 10                   # Consider
+link_match_minimum_response_fine: 0.1                   # Used in optimization
+link_scan_maximum_distance: 1.5                         # Used in optimization
+loop_search_maximum_distance: 3.0                       # Consider
+do_loop_closing: true
+loop_match_minimum_chain_size: 10                       # Consider
+loop_match_maximum_variance_coarse: 3.0                 # Used in optimization
+loop_match_minimum_response_coarse: 0.35                # Used in optimization
+loop_match_minimum_response_fine: 0.45                  # Used in optimization
+correlation_search_space_dimension: 0.2                 # Used in optimization
+correlation_search_space_resolution: 0.01               # Used in optimization
+correlation_search_space_smear_deviation: 0.1           # Used in optimization
+loop_search_space_dimension: 8.0                        # Used in optimization
+loop_search_space_resolution: 0.05                      # Used in optimization
+loop_search_space_smear_deviation: 0.03                 # Used in optimization
+distance_variance_penalty: 0.5                          # Used in optimization
+angle_variance_penalty: 1.0                             # Used in optimization
+fine_search_angle_offset: 0.00349                       # Used in optimization
+coarse_search_angle_offset: 0.349                       # Used in optimization
+coarse_angle_resolution: 0.0349                         # Used in optimization
+minimum_angle_penalty: 0.9                              # Used in optimization
+minimum_distance_penalty: 0.5                           # Used in optimization
+use_response_expansion: true                            # Consider

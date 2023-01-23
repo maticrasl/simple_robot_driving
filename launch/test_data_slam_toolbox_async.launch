@@ -1,0 +1,17 @@
+<launch>
+
+    <!-- Robot interface -->
+    <node pkg="simple_robot_driving" type="publish_captured_data.py" name="captured_data_publisher" output="screen"/>
+
+    <!-- tf laser_frame to base_link transform -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher" output="screen" args="0 0 0 0 0 0 base_link laser_frame"/>
+
+    <!-- SLAM Toolbox -->
+    <node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox" output="screen">
+        <rosparam command="load" file="$(find simple_robot_driving)/config/mapper_params_online_async.yaml"/>
+    </node>
+
+    <!-- Rviz -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/robot_configuration.rviz" />
+
+</launch>

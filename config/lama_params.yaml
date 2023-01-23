@@ -1,0 +1,28 @@
+# LaMa SLAM Params
+
+global_frame_id: map
+odom_frame_id: odom
+base_frame_id: base_link
+scan_topic: /scan
+
+transform_tolerance: 0.1
+initial_pos_x: 0.0
+initial_pos_y: 0.0
+initial_pos_a: 0.0
+d_thresh: 0.01                            # Consider?
+a_thresh: 0.25                            # Consider?
+l2_max: 0.5                               # Used in optimization
+resolution: 0.025                         # Consider
+patch_size: 32                            # Consider
+strategy: gn                              # Consider
+max_iterations: 100                       # Consider
+use_compression: false
+compression_algorithm: lz4
+cache_size: 100
+mrange: 1.2                               # Consider
+beam_step: 1
+truncate: 0                               # Consider?
+truncate_ray: 0                           # Consider?
+map_publish_period: 5                     # Consider
+transient_map: false                      # Consider?
+create_summary: false

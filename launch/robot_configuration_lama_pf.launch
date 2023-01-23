@@ -1,0 +1,84 @@
+<launch>
+
+    <!-- Robot interface -->
+    <!--<node pkg="simple_robot_driving" type="robot_interface.py" name="robot_interface" output="screen"/>-->
+
+    <!-- tf laser_frame to base_link transform -->
+    <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher" output="screen" args="0 0 0 0 0 0 base_link laser_frame"/>
+        <!--<param name="x" value="0"/>
+        <param name="y" value="0"/>
+        <param name="z" value="0"/>
+        <param name="yaw" value="0"/>
+        <param name="pitch" value="0"/>
+        <param name="roll" value="0"/>
+        <param name="frame_id" value="base_link"/>
+        <param name="child_frame_id" value="laser_frame"/>
+    </node>-->
+
+
+    <!-- LaMa PF -->
+    <node pkg="iris_lama_ros" type="pf_slam2d_ros" name="LaMa_ParticleFilter" output="screen">
+        <rosparam command="load" file="$(find simple_robot_driving)/config/lama_pf_params.yaml" />
+        <!--
+        <param name="map_frame_id" value="map"/>
+        <param name="odom_frame_id" value="odom"/>
+        <param name="base_frame_id" value="base_link"/>
+        <param name="scan_topic" value="scan"/>
+        <param name="transform_tolerance" value="0.1"/>
+
+        <param name="initial_pose_y" value="0"/>
+        <param name="initial_pose_x" value="0"/>
+        <param name="initial_pos_a" value="0"/>
+        <param name="d_thresh" value="0.01"/>
+        <param name="a_thresh" value="0.25"/>
+        <param name="l2_max" value="0.5"/>
+        <param name="resolution" value="0.05"/>
+        <param name="patch_size" value="32"/>
+        <param name="strategy" value="gn"/>
+        <param name="max_iterations" value="100"/>
+        <param name="use_compression" value="false"/>
+        <param name="compression_algorithm" value="lz4"/>
+        <param name="cache_size" value="100"/>
+        <param name="mrange" value="1.2"/>
+        <param name="beam_step" value="1"/>
+        <param name="truncate" value="0.0"/>
+        <param name="truncate_ray" value="0.0"/>
+        <param name="map_publish_period" value="5"/>
+        <param name="transient_map" value="false"/>
+        <param name="create_summary" value="false"/>
+
+        <param name="d_thresh" value="0.5"/>
+        <param name="particles" value="300"/>
+        <param name="seed" value="0"/>
+        <param name="threads" value="0"/>
+        <param name="sigma" value="0.05"/>
+        <param name="lgain" value="3.0"/>
+        <param name="srr" value="0.01"/>
+        <param name="srt" value="0.02"/>
+        <param name="str" value="0.005"/>
+        <param name="stt" value="0.01"/>
+        -->
+    </node>
+
+    <!-- LaMa SLAM -->
+    <!--
+    <node pkg="iris_lama_ros" type="slam2d_ros" name="LaMa_Hector" output="screen">
+        <param name="base_frame" value="base_link"/>
+        <param name="map_frame" value="map"/>
+        <param name="odom_frame" value="odom"/>
+        <param name="map_size" value="1024"/>
+        <param name="map_update_distance_thresh" value="0.4"/>
+        <param name="map_update_angle_thresh" value="0.9"/>
+        <param name="map_pub_period" value="2.0"/>
+        <param name="map_multi_res_levels" value="3"/>
+        <param name="update_factor_free" value="0.4"/>
+        <param name="update_factor_occupied" value="0.9"/>
+        <param name="laser_min_dist" value="0.01"/>
+        <param name="laser_max_dist" value="1.2"/>
+        <param name="scan_subscriber_queue_size" value="50"/>
+    </node>
+-->
+    <!-- Rviz -->
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/robot_configuration.rviz" />
+
+</launch>

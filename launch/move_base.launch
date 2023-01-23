@@ -1,0 +1,44 @@
+<launch>
+
+	<master auto="start"/>
+
+	<!-- Run the map server --> 
+	<!--<node name="map_server" pkg="map_server" type="map_server" args="$(find my_map_package)/my_map.pgm my_map_resolution"/>-->
+
+
+ 	<!--- Run AMCL --> 
+	<!--<include file="$(find amcl)/examples/amcl_diff.launch" />-->
+
+
+    <!-- Robot interface -->
+    <!--<node pkg="simple_robot_driving" type="gazebo_interface.py" name="robot_interface" output="screen"/>-->
+
+
+	<!-- Run the GMapping node -->
+	<!--<node pkg="gmapping" type="slam_gmapping" name="gmapping" output="screen">
+	    <rosparam command="load" file="$(find simple_robot_driving)/config/gmapping_params.yaml" />
+		<param name="/use_sim_time" value="true" />
+	</node>-->
+
+
+    <!-- LaMa PF -->
+    <!--<node pkg="iris_lama_ros" type="pf_slam2d_ros" name="LaMa_ParticleFilter" output="screen">
+        <rosparam command="load" file="$(find simple_robot_driving)/config/lama_pf_params.yaml" />
+		<param name="/use_sim_time" vlaue="true" />
+	</node>-->
+
+
+	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+	    <rosparam file="$(find simple_robot_driving)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+	    <rosparam file="$(find simple_robot_driving)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+	    <rosparam file="$(find simple_robot_driving)/config/local_costmap_params.yaml" command="load" />
+	    <rosparam file="$(find simple_robot_driving)/config/global_costmap_params.yaml" command="load" />
+	    <!--<rosparam file="$(find simple_robot_driving)/config/base_local_planner_params.yaml" command="load" />-->
+		<rosparam file="$(find simple_robot_driving)/config/global_planner_params.yaml" command="load" />
+	</node>
+
+
+    <!-- Rviz -->
+    <!--<node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/robot_configuration.rviz" />-->
+
+</launch> 

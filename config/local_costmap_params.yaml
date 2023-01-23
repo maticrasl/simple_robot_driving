@@ -1,0 +1,11 @@
+local_costmap:
+  global_frame: map
+  robot_base_frame: base_link
+  footprint: [[0.035, 0.065], [0.045, 0.0], [0.035, -0.065], [-0.08, -0.065], [-0.08, 0.065]]
+  update_frequency: 5.0
+  publish_frequency: 2.0
+  static_map: false
+  rolling_window: true
+  width: 3.0
+  height: 3.0
+  resolution: 0.025

@@ -1,0 +1,6 @@
+base_global_planner:
+  use_grid_path: true
+  use_dijkstra: false
+  default_tolerance: 0.0
+  lethal_cost: 253
+  # neutral_cost: 50
