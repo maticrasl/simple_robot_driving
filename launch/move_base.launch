@@ -11,7 +11,7 @@
 
 
     <!-- Robot interface -->
-    <!--<node pkg="simple_robot_driving" type="gazebo_interface.py" name="robot_interface" output="screen"/>-->
+    <!--<node pkg="simple_robot_driving" type="simulator_interface.py" name="robot_interface" output="screen"/>-->
 
 
 	<!-- Run the GMapping node -->

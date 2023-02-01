@@ -165,7 +165,7 @@ include_directories(
 catkin_install_python(PROGRAMS
   scripts/talker.py
   scripts/robot_interface.py
-  scripts/gazebo_interface.py
+  scripts/simulator_interface.py
   scripts/publish_captured_data.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
