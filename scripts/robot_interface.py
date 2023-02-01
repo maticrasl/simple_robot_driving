@@ -1,14 +1,16 @@
 #!/usr/bin/env python
+
 import rospy
-from std_msgs.msg import String
+
+from math import atan, atan2, cos, sin, sqrt, pi
+import numpy as np
+import socket
+
 from geometry_msgs.msg import Twist, Point, Pose, Quaternion, Vector3, PointStamped
 from simple_robot_driving.msg import SimpleRobotDriveMsg
 from sensor_msgs.msg import LaserScan
 from nav_msgs.msg import Odometry
-from math import sin, cos, atan, sqrt, pi
 import tf
-import socket
-import numpy as np
 
 
 # message = "0"
@@ -22,7 +24,9 @@ scan_range_min = 0.001
 scan_range_max = 1.5
 
 
-def get_dist_ang_from_point(orig_x, orig_y, orig_th, dest_x, dest_y):       # TODO check coordinates here!
+def get_dist_ang_from_point(orig_x: float, orig_y: float,
+                            orig_th: float, dest_x: float, dest_y: float) -> SimpleRobotDriveMsg:
+    """ Get angle(rad) and distance(m) needed to get from source to destination. """
     delta_x = dest_x - orig_x
     delta_y = dest_y - orig_y
 
@@ -55,17 +59,34 @@ def get_dist_ang_from_point(orig_x, orig_y, orig_th, dest_x, dest_y):       # TO
     return new_data
 
 
-def str2float(str):
-    return float(str)
+def str2float(s: str) -> float:
+    return float(s)
 
 
-# Function for filtering the scan data
 def filter_scan_data(data, delta):
-    return
+    """ Filter the scan data """
+    pass
 
 
-# Calculate the robot's driving time from a given distance.
-def get_time_from_dist(dist):
+def get_difference_between_angles(a1: float = 0.0, a2: float = 0.0) -> float:
+    """ Calculate the difference between two angles """
+    a1x = cos(a1)
+    a1y = sin(a1)
+    a2x = cos(a2)
+    a2y = sin(a2)
+
+    dx = a1x - a2x
+    dy = a1y - a2y
+
+    da = atan2(dx, dy)
+
+    # print("Difference between angles", a1, "and", a2, "is", da, ".")
+
+    return da
+
+
+def get_time_from_dist(dist: float) -> float:
+    """ Given the driving distance, calculate the necessary robot driving time. """
     dist1 = abs(dist)
     if dist1 == 0.0:
         return 0.0
@@ -77,33 +98,35 @@ def get_time_from_dist(dist):
     if dist < 0:
         time *= -1
     
-    time *= 1.00                    # Artificially increase the value, due to the battery depletion
+    time *= 1.00    # Artificially increase the value, due to the battery depletion
 
     return time
 
 
-# Rotates the point by the given angle (in degrees) and returns the new point coordinates.
 def rotate_point(point, angle):
+    """ Rotate the point by the given angle (in degrees) and return the new point coordinates. """
     angle_rad = np.deg2rad(angle)
     new_point = (point[0] * cos(angle_rad) - point[1] * sin(angle_rad), point[0] * sin(angle_rad) + point[1] * cos(angle_rad))
     return new_point
 
 
-# Returns the eucledean distance between two points.
-def get_distance(len1, len2, angle=3):
+def get_distance(len1: float, len2: float, angle=3) -> float:
+    """ Return the eucledean distance between two measured points. 
+        Here, point is a measured distance and not actually a point with 2D coordinates.
+    """
     point1 = (len1, 0)
     point2 = rotate_point((len2, 0), angle)
 
     return np.sqrt((point1[0] - point2[0])**2 + (point1[1] - point2[1])**2)
 
 
-# Function to calculate the maximum value fraction between the neighbouring points, based on the scan_step and max_alpha values.
 def get_max_neighbour_distance(scan_step, max_alpha):
+    """ Calculate the maximum value fraction between the neighbouring points, based on the scan_step and max_alpha values. """
     return np.sin(np.abs(scan_step)) / np.sin(pi - np.abs(scan_step) - max_alpha)
 
 
 # Function that removes all points that are potentionally the result of ghosting from the sensor.
-def remove_ghosting_from_points(distances, scan_step):
+def remove_ghosting_from_points(distances, scan_step: float):
     max_alpha = np.deg2rad(30)
     max_distance_nearest_neighbour = get_max_neighbour_distance(scan_step, max_alpha)
     # print("max_distance_nearest_neighbour", max_distance_nearest_neighbour)
@@ -141,20 +164,20 @@ class driver:
         self.start_publishing_odom()
 
 
-    def get_cmd_vel(self, data):
+    def get_cmd_vel(self, data) -> None:
         linear = data.linear.x
         rotation = data.angular.z
         self.send_cmd_vel_to_arduino(linear, rotation)
 
 
-    def send_cmd_vel_to_arduino(self, linear, rotation):
+    def send_cmd_vel_to_arduino(self, linear: float, rotation: float) -> None:
         global message
         message = "m{},{},*".format(linear, rotation)
         print("\tLinear", linear, "----", "Angular", rotation)
         # client.sendto(message.encode(), (TCP_IP, TCP_PORT))
 
 
-    def get_dist_ang(self, data):                           # TODO check for coordinates here!
+    def get_dist_ang(self, data) -> None:
         rotation = data.rotation
         distance = data.distance
         time = get_time_from_dist(distance)
@@ -181,7 +204,7 @@ class driver:
         self.publish_laser_scan(recv_message, timestamp)
 
 
-    def send_time_rot_to_arduino(self, time, rotation):
+    def send_time_rot_to_arduino(self, time, rotation) -> str:
         global message
         global TCP_IP
         global TCP_PORT
@@ -202,7 +225,7 @@ class driver:
         return data
 
 
-    def send_scan_to_arduino(self):
+    def send_scan_to_arduino(self) -> str:
         global message
         global scan_angle
         global scan_step
@@ -221,12 +244,12 @@ class driver:
         return data
 
 
-    def get_clicked_point(self, data):
+    def get_clicked_point(self, data) -> None:
         new_data = get_dist_ang_from_point(self.x, self.y, self.th, data.point.x, data.point.y)
         self.get_dist_ang(new_data)
 
 
-    def start_publishing_odom(self):
+    def start_publishing_odom(self) -> None:
         r = rospy.Rate(5)
         while not rospy.is_shutdown():
             timestamp = rospy.Time.now()
@@ -255,7 +278,7 @@ class driver:
             r.sleep()
 
 
-    def publish_laser_scan(self, data, timestamp):
+    def publish_laser_scan(self, data, timestamp) -> None:
         global scan_angle_rad
         global scan_step_rad
         global laser_frequency
@@ -286,10 +309,9 @@ class driver:
             scan.ranges.append(d)
 
         self.scan_pub.publish(scan)
-        return
 
 
-    def publish_odometry(self, dist, starting_angle, middle_angle, ending_angle, timestamp):        # TODO check coordinates here!
+    def publish_odometry(self, dist, starting_angle, middle_angle, ending_angle, timestamp) -> None:
         # delta_th = ending_angle - self.th
         avg_move_th = (middle_angle + ending_angle) / 2.0
 
@@ -332,10 +354,8 @@ class driver:
 
         self.odom_pub.publish(odom)
 
-        return
 
-
-if __name__ == '__main__':
+def main():
     TCP_IP = "192.168.208.39"
     #TCP_IP = "192.168.0.143"
     #UDP_IP = "192.168.5.13"
@@ -349,3 +369,7 @@ if __name__ == '__main__':
     except rospy.ROSInterruptException:
         print("\n")
         pass
+
+
+if __name__ == '__main__':
+    main()
