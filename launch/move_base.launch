@@ -16,25 +16,25 @@
 
 	<!-- Run the GMapping node -->
 	<!--<node pkg="gmapping" type="slam_gmapping" name="gmapping" output="screen">
-	    <rosparam command="load" file="$(find simple_robot_driving)/config/gmapping_params.yaml" />
+	    <rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params.yaml" />
 		<param name="/use_sim_time" value="true" />
 	</node>-->
 
 
     <!-- LaMa PF -->
     <!--<node pkg="iris_lama_ros" type="pf_slam2d_ros" name="LaMa_ParticleFilter" output="screen">
-        <rosparam command="load" file="$(find simple_robot_driving)/config/lama_pf_params.yaml" />
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/lama_pf_params.yaml" />
 		<param name="/use_sim_time" vlaue="true" />
 	</node>-->
 
 
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-	    <rosparam file="$(find simple_robot_driving)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
-	    <rosparam file="$(find simple_robot_driving)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-	    <rosparam file="$(find simple_robot_driving)/config/local_costmap_params.yaml" command="load" />
-	    <rosparam file="$(find simple_robot_driving)/config/global_costmap_params.yaml" command="load" />
-	    <!--<rosparam file="$(find simple_robot_driving)/config/base_local_planner_params.yaml" command="load" />-->
-		<rosparam file="$(find simple_robot_driving)/config/global_planner_params.yaml" command="load" />
+	    <rosparam file="$(find simple_robot_driving)/config/navigation/costmap_common_params.yaml" command="load" ns="global_costmap" />
+	    <rosparam file="$(find simple_robot_driving)/config/navigation/costmap_common_params.yaml" command="load" ns="local_costmap" />
+	    <rosparam file="$(find simple_robot_driving)/config/navigation/local_costmap_params.yaml" command="load" />
+	    <rosparam file="$(find simple_robot_driving)/config/navigation/global_costmap_params.yaml" command="load" />
+	    <!--<rosparam file="$(find simple_robot_driving)/config/navigation/base_local_planner_params.yaml" command="load" />-->
+		<rosparam file="$(find simple_robot_driving)/config/navigation/global_planner_params.yaml" command="load" />
 	</node>
 
 

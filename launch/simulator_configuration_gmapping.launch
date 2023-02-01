@@ -15,15 +15,15 @@
 
     <!-- GMapping -->
     <node pkg="gmapping" type="slam_gmapping" name="gmapping">
-        <rosparam command="load" file="$(find simple_robot_driving)/config/gmapping_params.yaml" />
-        <!--<rosparam command="load" file="$(find simple_robot_driving)/config/gmapping_params_GT.yaml" />-->
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params.yaml" />
+        <!--<rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params_GT.yaml" />-->
     </node>
     <!--<node pkg="iris_lama_ros" type="pf_slam2d_ros" name="lama_pf_slam2d" output="screen">
-        <rosparam command="load" file="$(find simple_robot_driving)/config/lama_pf_params.yaml" />
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/lama_pf_params.yaml" />
     </node>-->
     <!-- SLAM Toolbox -->
     <!--<node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox_async" output="screen">
-        <rosparam command="load" file="$(find simple_robot_driving)/config/slam_toolbox_params.yaml" />
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/slam_toolbox_params.yaml" />
         <param name="/use_sim_time" value="true" />
     </node>-->
     
@@ -47,13 +47,13 @@
     <!-- move_base node is used to find the trajectory (path) to the goal.
          The goal will be published to the make_plan service. It will then return the path, which will be used to drive the robot. -->
     <!--<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-	    <rosparam file="$(find simple_robot_driving)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
-	    <rosparam file="$(find simple_robot_driving)/config/global_costmap_params.yaml" command="load" />
-        <rosparam file="$(find simple_robot_driving)/config/move_base_params.yaml" command="load" />-->
-	    <!--<rosparam file="$(find simple_robot_driving)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />-->
-	    <!--<rosparam file="$(find simple_robot_driving)/config/local_costmap_params.yaml" command="load" />-->
-		<!--<rosparam file="$(find simple_robot_driving)/config/global_planner_params.yaml" command="load" />-->
-	    <!--<rosparam file="$(find simple_robot_driving)/config/base_local_planner_params.yaml" command="load" />-->
+	    <rosparam file="$(find simple_robot_driving)/config/navigation/costmap_common_params.yaml" command="load" ns="local_costmap" />
+	    <rosparam file="$(find simple_robot_driving)/config/navigation/global_costmap_params.yaml" command="load" />
+        <rosparam file="$(find simple_robot_driving)/config/navigation/move_base_params.yaml" command="load" />-->
+	    <!--<rosparam file="$(find simple_robot_driving)/config/navigation/costmap_common_params.yaml" command="load" ns="global_costmap" />-->
+	    <!--<rosparam file="$(find simple_robot_driving)/config/navigation/local_costmap_params.yaml" command="load" />-->
+		<!--<rosparam file="$(find simple_robot_driving)/config/navigation/global_planner_params.yaml" command="load" />-->
+	    <!--<rosparam file="$(find simple_robot_driving)/config/navigation/base_local_planner_params.yaml" command="load" />-->
 	<!--</node>-->
 
       <!-- move_base -->

@@ -18,7 +18,7 @@
 
     <!-- LaMa PF -->
     <node pkg="iris_lama_ros" type="pf_slam2d_ros" name="LaMa_ParticleFilter" output="screen">
-        <rosparam command="load" file="$(find simple_robot_driving)/config/lama_pf_params.yaml" />
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/lama_pf_params.yaml" />
         <!--
         <param name="map_frame_id" value="map"/>
         <param name="odom_frame_id" value="odom"/>

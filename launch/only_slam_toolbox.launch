@@ -2,8 +2,8 @@
 
     <!-- SLAM Toolbox -->
     <node pkg="slam_toolbox" type="async_slam_toolbox_node" name="slam_toolbox" output="screen">
-        <!--<rosparam command="load" file="$(find simple_robot_driving)/config/mapper_params_online_async.yaml"/>-->
-        <rosparam command="load" file="$(find simple_robot_driving)/config/slam_toolbox_params.yaml"/>
+        <!--<rosparam command="load" file="$(find simple_robot_driving)/config/slam/mapper_params_online_async.yaml"/>-->
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/slam_toolbox_params.yaml"/>
         <param name="/use_sim_time" value="true" />
     </node>
 

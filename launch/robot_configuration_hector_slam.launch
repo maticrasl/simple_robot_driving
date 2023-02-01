@@ -10,7 +10,7 @@
 
     <!-- Hector SLAM -->
     <node pkg="hector_mapping" type="hector_mapping" name="hector_mapping" output="screen">
-        <rosparam command="load" file="$(find simple_robot_driving)/config/hector_slam_params.yaml" />
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/hector_slam_params.yaml" />
     </node>
     
 

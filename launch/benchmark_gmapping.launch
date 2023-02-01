@@ -25,8 +25,8 @@
     
     <!-- GMapping -->
     <node pkg="gmapping" type="slam_gmapping" name="gmapping" required="true" respawn="false" output="log">
-        <rosparam command="load" file="$(find simple_robot_driving)/config/gmapping_params.yaml" />
-        <!--<rosparam command="load" file="$(find simple_robot_driving)/config/gmapping_params_GT.yaml" />-->
+        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params.yaml" />
+        <!--<rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params_GT.yaml" />-->
     </node>
 
     <!-- Benchmarker -->
