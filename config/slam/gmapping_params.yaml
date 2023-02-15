@@ -1,6 +1,6 @@
 # GMapping params:
 base_frame: base_link
-map_frame: world
+map_frame: map
 odom_frame: odom
 
 throttle_scans: 1.0
