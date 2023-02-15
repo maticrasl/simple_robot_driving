@@ -7,6 +7,7 @@ Panels:
         - /Global Options1
         - /TF1
         - /TF1/Frames1
+        - /TF1/Tree1/world1
       Splitter Ratio: 0.5
     Tree Height: 746
   - Class: rviz/Selection
@@ -26,7 +27,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -126,14 +127,22 @@ Visualization Manager:
         All Enabled: false
         base_link:
           Value: true
+        base_link_old:
+          Value: true
         ground_truth:
           Value: false
         laser_frame:
           Value: false
+        laser_frame_old:
+          Value: true
         map:
           Value: false
         odom:
-          Value: false
+          Value: true
+        odom_old:
+          Value: true
+        world:
+          Value: true
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -141,9 +150,7 @@ Visualization Manager:
       Show Axes: true
       Show Names: true
       Tree:
-        map:
-          ground_truth:
-            {}
+        world:
           odom:
             base_link:
               laser_frame:
@@ -178,7 +185,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: odom
+    Fixed Frame: world
     Frame Rate: 30
   Name: root
   Tools:
@@ -211,7 +218,7 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 300.07281494140625
+      Scale: 204.49122619628906
       Target Frame: <Fixed Frame>
       X: 0
       Y: 0
