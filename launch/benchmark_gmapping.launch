@@ -3,12 +3,26 @@
     <arg name="mapfile" default="Maze" />
     <arg name="kitti_path" default="/home/matic/Documents/Magistrska/Benchmarking" />
     <arg name="rosbag_path" default="/home/matic/Documents/Magistrska/bagfiles/recordings/" />
-    <arg name="rosbag_rate" default="10" />
+    <arg name="rosbag_rate" default="20" />
     <arg name="node_start_delay" default="0.5" />
     <arg name="initial_pos_x" default="1.25" />
     <arg name="initial_pos_y" default="-1.25" />
     <arg name="initial_pos_a" default="0.0" />
     <arg name="generate_gt" default="0" />
+
+    <arg name="sigma" default="0.05" />
+    <arg name="kernelSize" default="1" />
+    <arg name="lstep" default="0.05" />
+    <arg name="astep" default="0.5" />
+    <arg name="lsigma" default="0.075" />
+    <arg name="ogain" default="3" />
+    <arg name="minimumScore" default="0" />
+    <arg name="srr" default="0.002" />
+    <arg name="srt" default="0.002" />
+    <arg name="str" default="0.002" />
+    <arg name="stt" default="0.005" />
+    <arg name="resampleThreshold" default="0.5" />
+    <arg name="particles" default="10" />
 
     <!-- Parameters -->
     <param name="initial_pos_x" value="$(arg initial_pos_x)" />
@@ -28,6 +42,19 @@
     <node pkg="gmapping" type="slam_gmapping" name="gmapping" required="true" respawn="false" >
         <rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params.yaml" />
         <param name="map_frame" value="world"/>
+        <param name="sigma" value="$(arg sigma)" />
+        <param name="kernelSize" value="$(arg kernelSize)" />
+        <param name="lstep" value="$(arg lstep)" />
+        <param name="astep" value="$(arg astep)" />
+        <param name="lsigma" value="$(arg lsigma)" />
+        <param name="ogain" value="$(arg ogain)" />
+        <param name="minimumScore" value="$(arg minimumScore)" />
+        <param name="srr" value="$(arg srr)" />
+        <param name="srt" value="$(arg srt)" />
+        <param name="str" value="$(arg str)" />
+        <param name="stt" value="$(arg stt)" />
+        <param name="resampleThreshold" value="$(arg resampleThreshold)" />
+        <param name="particles" value="$(arg particles)" />
         <!--<rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params_GT.yaml" />-->
     </node>
 
@@ -39,7 +66,7 @@
     </node>
 
     <!-- Rviz -->
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/robot_configuration.rviz" output="log"/>
+    <!--<node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/robot_configuration.rviz" output="log"/>-->
 
     <!-- Rosbag -->
     <node pkg="rosbag" type="play" name="rosbag" args="--clock -r $(arg rosbag_rate) $(arg rosbag_path)$(arg mapfile).bag --topics /tf /scan /ground_truth" required="true" launch-prefix="bash -c 'sleep $(arg node_start_delay); $0 $@' ">
