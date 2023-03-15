@@ -153,11 +153,11 @@ class driver:
     def __init__(self):
         rospy.init_node('sim_interface', anonymous=True)
 
-        rospy.Subscriber('/dist_ang', SimpleRobotDriveMsg, self.get_dist_ang)
-        rospy.Subscriber('/clicked_point', PointStamped, self.get_clicked_point)
-        # rospy.Subscriber('/sim_odom', Odometry, self.get_sim_odom)
-        rospy.Subscriber('/sim_scan', LaserScan, self.get_sim_scan)
-        rospy.Subscriber('/sim_angles', ThreeAngles, self.get_sim_angles)
+        rospy.Subscriber('/dist_ang', SimpleRobotDriveMsg, self.get_dist_ang, queue_size=50)
+        rospy.Subscriber('/clicked_point', PointStamped, self.get_clicked_point, queue_size=50)
+        # rospy.Subscriber('/sim_odom', Odometry, self.get_sim_odom, queue_size=50)
+        rospy.Subscriber('/sim_scan', LaserScan, self.get_sim_scan, queue_size=50)
+        rospy.Subscriber('/sim_angles', ThreeAngles, self.get_sim_angles, queue_size=50)
         self.scan_pub = rospy.Publisher('scan', LaserScan, queue_size=50)
         self.odom_pub = rospy.Publisher('odom', Odometry, queue_size=50)
         self.drive_pub = rospy.Publisher('make_drive', SimpleRobotDriveMsg, queue_size=50)
