@@ -19,7 +19,7 @@ mode: mapping
 debug_logging: false
 throttle_scans: 1
 transform_publish_period: 0.02                          # Consider
-map_update_interval: 2.0                                # Consider
+map_update_interval: 1.0                                # Consider
 enable_interactive_mode: false                          # Can be true while debugging!
 resolution: 0.025                                       # Consider
 max_laser_range: 1.5                                    # Consider
@@ -27,7 +27,7 @@ minimum_time_interval: 0.2                              # Consider
 transform_timeout: 0.2                                  # Consider
 tf_buffer_duration: 30000000                            # Consider
 stack_size_to_use: 40000000                             # Consider
-minimum_travel_distance: 0.1                            # Consider
+minimum_travel_distance: 0.01                           # Consider
 
 # Matcher Parameters
 use_scan_matching: true
