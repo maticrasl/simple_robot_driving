@@ -3,26 +3,40 @@
     <arg name="mapfile" default="Maze" />
     <arg name="kitti_path" default="/home/matic/Documents/Magistrska/Benchmarking" />
     <arg name="rosbag_path" default="/home/matic/Documents/Magistrska/bagfiles/recordings/" />
-    <arg name="rosbag_rate" default="20" />
+    <arg name="rosbag_rate" default="25" />
     <arg name="node_start_delay" default="0.5" />
     <arg name="initial_pos_x" default="1.25" />
     <arg name="initial_pos_y" default="-1.25" />
     <arg name="initial_pos_a" default="0.0" />
     <arg name="generate_gt" default="0" />
 
+    <!-- GMAPPING PARAMS -->
+    <!-- Args for optimization -->
     <arg name="sigma" default="0.05" />
     <arg name="kernelSize" default="1" />
     <arg name="lstep" default="0.05" />
-    <arg name="astep" default="0.5" />
+    <arg name="astep" default="0.05" />
     <arg name="lsigma" default="0.075" />
-    <arg name="ogain" default="3" />
-    <arg name="minimumScore" default="0" />
+    <arg name="ogain" default="3.0" />
+    <arg name="minimumScore" default="0.0" />
     <arg name="srr" default="0.002" />
     <arg name="srt" default="0.002" />
     <arg name="str" default="0.002" />
     <arg name="stt" default="0.005" />
     <arg name="resampleThreshold" default="0.5" />
-    <arg name="particles" default="10" />
+
+    <!-- Fixed values args -->
+    <arg name="particles" default="5" />
+    <arg name="map_update_interval" default="2.0" />
+    <arg name="iterations" default="5" />
+    <arg name="linearUpdate" default="0.2" />
+    <arg name="angularUpdate" default="0.5" />
+    <arg name="llsamplerange" default="0.01" />
+    <arg name="llsamplestep" default="0.01" />
+    <arg name="lasamplerange" default="0.005" />
+    <arg name="lasamplestep" default="0.005" />
+    <arg name="transform_publish_period" default="0.05" />
+    <arg name="occ_thresh" default="0.25" />
 
     <!-- Parameters -->
     <param name="initial_pos_x" value="$(arg initial_pos_x)" />
@@ -55,7 +69,16 @@
         <param name="stt" value="$(arg stt)" />
         <param name="resampleThreshold" value="$(arg resampleThreshold)" />
         <param name="particles" value="$(arg particles)" />
-        <!--<rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params_GT.yaml" />-->
+        <param name="map_update_interval" value="$(arg map_update_interval)" />
+        <param name="iterations" value="$(arg iterations)" />
+        <param name="linearUpdate" value="$(arg linearUpdate)" />
+        <param name="angularUpdate" value="$(arg angularUpdate)" />
+        <param name="llsamplerange" value="$(arg llsamplerange)" />
+        <param name="llsamplestep" value="$(arg llsamplestep)" />
+        <param name="lasamplerange" value="$(arg lasamplerange)" />
+        <param name="lasamplestep" value="$(arg lasamplestep)" />
+        <param name="transform_publish_period" value="$(arg transform_publish_period)" />
+        <param name="occ_thresh" value="$(arg occ_thresh)" />
     </node>
 
     <!-- Benchmarker -->
