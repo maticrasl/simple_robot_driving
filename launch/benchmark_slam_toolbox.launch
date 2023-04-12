@@ -3,42 +3,45 @@
     <arg name="mapfile" default="Maze" />
     <arg name="kitti_path" default="/home/matic/Documents/Magistrska/Benchmarking" />
     <arg name="rosbag_path" default="/home/matic/Documents/Magistrska/bagfiles/recordings/" />
-    <arg name="rosbag_rate" default="5" />
+    <arg name="rosbag_rate" default="50" />
     <arg name="node_start_delay" default="0.5" />
     <arg name="initial_pos_x" default="1.25" />
     <arg name="initial_pos_y" default="-1.25" />
     <arg name="initial_pos_a" default="0.0" />
     <arg name="generate_gt" default="0" />
 
+    <!-- SLAM TOOLBOX PARAMS -->
+    <!-- General Parameters -->
+    <arg name="minimum_travel_heading" default="5" />
+    <arg name="scan_buffer_size" default="10" />
+    <arg name="scan_buffer_maximum_scan_distance" default="10" />
+    <arg name="link_match_minimum_response_fine" default="0.1" />
+    <arg name="link_scan_maximum_distance" default="1.5" />
+    <arg name="loop_search_maximum_distance" default="3.0" />
+    <arg name="loop_match_minimum_chain_size" default="10" />
+    <arg name="loop_match_maximum_variance_coarse" default="3.0" />
+    <arg name="loop_match_minimum_response_coarse" default="0.35" />
+    <arg name="loop_match_minimum_response_fine" default="0.45" />
+    
+    <!-- Correlation Parameters -->
+    <arg name="correlation_search_space_dimension" default="0.2" />
+    <arg name="correlation_search_space_resolution" default="0.05" />
+    <arg name="correlation_search_space_smear_deviation" default="0.1" />
+    <arg name="loop_search_space_dimension" default="8.0" />
+    <arg name="loop_search_space_resolution" default="0.5" />
+    <arg name="loop_search_space_smear_deviation" default="0.3" />
+    <arg name="distance_variance_penalty" default="0.5" />
+    <arg name="angle_variance_penalty" default="1.0" />
+    <arg name="fine_search_angle_offset" default="0.0349" />
+    <arg name="coarse_search_angle_offset" default="0.349" />
+    <arg name="coarse_angle_resolution" default="0.0349" />
+    <arg name="minimum_angle_penalty" default="0.9" />
+    <arg name="minimum_distance_penalty" default="0.5" />
+
+    <!-- Parameters -->
     <param name="initial_pos_x" value="$(arg initial_pos_x)" />
     <param name="initial_pos_y" value="$(arg initial_pos_y)" />
     <param name="initial_pos_a" value="$(arg initial_pos_a)" />
-
-    <!-- SLAM TOOLBOX PARAMS -->
-    <!-- General Parameters -->
-    <param name="minimum_travel_distance" value="0.5" />
-    <param name="minimum_travel_heading" value="5" />
-    <param name="scan_buffer_size" value="10" />
-    <param name="scan_buffer_maximum_scan_distance" value="10" />
-    <param name="link_match_minimum_response_fine" value="0.1" />
-    <param name="link_scan_maximum_distance" value="1.5" />
-    <param name="loop_search_maximum_distance" value="3.0" />
-    <param name="loop_match_minimum_chain_size" value="10" />
-    <param name="loop_match_maximum_variance_coarse" value="3.0" />
-    <param name="loop_match_minimum_response_coarse" value="0.35" />
-    <param name="loop_match_minimum_response_fine" value="0.45" />
-    
-    <!-- Correlation Parameters -->
-    <param name="loop_search_space_dimension" value="8.0" />
-    <param name="loop_search_space_resolution" value="0.05" />
-    <param name="loop_search_space_smear_deviation" value="0.03" />
-    <param name="distance_variance_penalty" value="0.5" />
-    <param name="angle_variance_penalty" value="1.0" />
-    <param name="fine_search_angle_offset" value="0.00349" />
-    <param name="coarse_search_angle_offset" value="0.349" />
-    <param name="coarse_angle_resolution" value="0.0349" />
-    <param name="minimum_angle_penalty" value="0.9" />
-    <param name="minimum_distance_penalty" value="0.5" />
 
 
     <node pkg="tf2_ros" type="static_transform_publisher" name="static_transform_publisher" output="log" args="0 0 0 0 0 0 base_link laser_frame"/>
@@ -48,40 +51,34 @@
             [{old: odom, new: odom_old},{old: base_link, new: base_link_old},{old: laser_frame, new: laser_frame_old}]
         </rosparam>
     </node>
-    
-    <!-- GMapping -->
-    <!--<node pkg="gmapping" type="slam_gmapping" name="gmapping" required="true" respawn="false" >
-        <rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params.yaml" />
-    </node>-->
 
     <!-- SLAM Toolbox -->
     <node pkg="slam_toolbox" type="sync_slam_toolbox_node" name="slam_toolbox" required="true" respawn="false" >
         <rosparam command="load" file="$(find simple_robot_driving)/config/slam/slam_toolbox_params.yaml" />
         <param name="map_frame" value="world" />
-        <param name="minimum_travel_distance" value="#(arg minimum_travel_distance)" />
-        <param name="minimum_travel_heading" value="#(arg minimum_travel_heading)" />
-        <param name="scan_buffer_size" value="#(arg scan_buffer_size)" />
-        <param name="scan_buffer_maximum_scan_distance" value="#(arg scan_buffer_maximum_scan_distance)" />
-        <param name="link_match_minimum_response_fine" value="#(arg link_match_minimum_response_fine)" />
-        <param name="link_scan_maximum_distance" value="#(arg link_scan_maximum_distance)" />
-        <param name="loop_search_maximum_distance" value="#(arg loop_search_maximum_distance)" />
-        <param name="loop_match_minimum_chain_size" value="#(arg loop_match_minimum_chain_size)" />
-        <param name="loop_match_maximum_variance_coarse" value="#(arg loop_match_maximum_variance_coarse)" />
-        <param name="loop_match_minimum_response_coarse" value="#(arg loop_match_minimum_response_coarse)" />
-        <param name="loop_match_minimum_response_fine" value="#(arg loop_match_minimum_response_fine)" />
-        <param name="correlation_search_space_dimension" value="#(arg correlation_search_space_dimension)" />
-        <param name="correlation_search_space_resolution" value="#(arg correlation_search_space_resolution)" />
-        <param name="correlation_search_space_smear_deviation" value="#(arg correlation_search_space_smear_deviation)" />
-        <param name="loop_search_space_dimension" value="#(arg loop_search_space_dimension)" />
-        <param name="loop_search_space_resolution" value="#(arg loop_search_space_resolution)" />
-        <param name="loop_search_space_smear_deviation" value="#(arg loop_search_space_smear_deviation)" />
-        <param name="distance_variance_penalty" value="#(arg distance_variance_penalty)" />
-        <param name="angle_variance_penalty" value="#(arg angle_variance_penalty)" />
-        <param name="fine_search_angle_offset" value="#(arg fine_search_angle_offset)" />
-        <param name="coarse_search_angle_offset" value="#(arg coarse_search_angle_offset)" />
-        <param name="coarse_angle_resolution" value="#(arg coarse_angle_resolution)" />
-        <param name="minimum_angle_penalty" value="#(arg minimum_angle_penalty)" />
-        <param name="minimum_distance_penalty" value="#(arg minimum_distance_penalty)" />
+        <param name="minimum_travel_heading" value="$(arg minimum_travel_heading)" />
+        <param name="scan_buffer_size" value="$(arg scan_buffer_size)" />
+        <param name="scan_buffer_maximum_scan_distance" value="$(arg scan_buffer_maximum_scan_distance)" />
+        <param name="link_match_minimum_response_fine" value="$(arg link_match_minimum_response_fine)" />
+        <param name="link_scan_maximum_distance" value="$(arg link_scan_maximum_distance)" />
+        <param name="loop_search_maximum_distance" value="$(arg loop_search_maximum_distance)" />
+        <param name="loop_match_minimum_chain_size" value="$(arg loop_match_minimum_chain_size)" />
+        <param name="loop_match_maximum_variance_coarse" value="$(arg loop_match_maximum_variance_coarse)" />
+        <param name="loop_match_minimum_response_coarse" value="$(arg loop_match_minimum_response_coarse)" />
+        <param name="loop_match_minimum_response_fine" value="$(arg loop_match_minimum_response_fine)" />
+        <param name="correlation_search_space_dimension" value="$(arg correlation_search_space_dimension)" />
+        <param name="correlation_search_space_resolution" value="$(arg correlation_search_space_resolution)" />
+        <param name="correlation_search_space_smear_deviation" value="$(arg correlation_search_space_smear_deviation)" />
+        <param name="loop_search_space_dimension" value="$(arg loop_search_space_dimension)" />
+        <param name="loop_search_space_resolution" value="$(arg loop_search_space_resolution)" />
+        <param name="loop_search_space_smear_deviation" value="$(arg loop_search_space_smear_deviation)" />
+        <param name="distance_variance_penalty" value="$(arg distance_variance_penalty)" />
+        <param name="angle_variance_penalty" value="$(arg angle_variance_penalty)" />
+        <param name="fine_search_angle_offset" value="$(arg fine_search_angle_offset)" />
+        <param name="coarse_search_angle_offset" value="$(arg coarse_search_angle_offset)" />
+        <param name="coarse_angle_resolution" value="$(arg coarse_angle_resolution)" />
+        <param name="minimum_angle_penalty" value="$(arg minimum_angle_penalty)" />
+        <param name="minimum_distance_penalty" value="$(arg minimum_distance_penalty)" />
     </node>
 
     <!-- Benchmarker -->
