@@ -1,6 +1,6 @@
 <launch>
 
-    <arg name="mapfile" default="Maze" />
+    <arg name="mapfile" default="optimization/Maze" />
     <arg name="kitti_path" default="/home/matic/Documents/Magistrska/Benchmarking" />
     <arg name="rosbag_path" default="/home/matic/Documents/Magistrska/bagfiles/recordings/" />
     <arg name="rosbag_rate" default="50" />
