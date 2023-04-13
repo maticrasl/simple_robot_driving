@@ -18,12 +18,12 @@ minimumScore: 0.0                   # Used in optimization
 srr: 0.002                          # Used in optimization
 srt: 0.002                          # Used in optimization
 str: 0.002                          # Used in optimization
-stt: 0.005                          # Used in optimization
+stt: 0.002                          # Used in optimization
 linearUpdate: 0.2                   # Consider
 angularUpdate: 0.5                  # Consider
 temporalUpdate: -1.0
 resampleThreshold: 0.5              # Used in optimization
-particles: 10                      # Consider
+particles: 20                      # Consider
 xmin: -10.0
 ymin: -10.0
 xmax: 10.0
