@@ -27,7 +27,7 @@ minimum_time_interval: 0.2                              # Consider
 transform_timeout: 0.2                                  # Consider
 tf_buffer_duration: 30000000                            # Consider
 stack_size_to_use: 40000000                             # Consider
-minimum_travel_distance: 0.01                           # Consider
+minimum_travel_distance: 0.5                            # Consider
 
 # Matcher Parameters
 use_scan_matching: true
@@ -43,7 +43,7 @@ loop_match_minimum_chain_size: 10                       # Consider
 loop_match_maximum_variance_coarse: 3.0                 # Used in optimization
 loop_match_minimum_response_coarse: 0.35                # Used in optimization
 loop_match_minimum_response_fine: 0.45                  # Used in optimization
-correlation_search_space_dimension: 0.2                 # Used in optimization
+correlation_search_space_dimension: 0.5                 # Used in optimization
 correlation_search_space_resolution: 0.01               # Used in optimization
 correlation_search_space_smear_deviation: 0.1           # Used in optimization
 loop_search_space_dimension: 8.0                        # Used in optimization
@@ -55,5 +55,5 @@ fine_search_angle_offset: 0.00349                       # Used in optimization
 coarse_search_angle_offset: 0.349                       # Used in optimization
 coarse_angle_resolution: 0.0349                         # Used in optimization
 minimum_angle_penalty: 0.9                              # Used in optimization
-minimum_distance_penalty: 0.5                           # Used in optimization
+minimum_distance_penalty: 0.05                          # Used in optimization
 use_response_expansion: true                            # Consider
