@@ -19,7 +19,7 @@ max_iterations: 100                       # Consider
 use_compression: false
 compression_algorithm: lz4
 cache_size: 100
-mrange: 1.2                               # Consider
+mrange: 1.5                               # Consider
 beam_step: 1
 truncate: 0                               # Consider?
 truncate_ray: 0                           # Consider?
