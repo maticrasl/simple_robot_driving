@@ -53,7 +53,7 @@
     </node>
     
     <!-- GMapping -->
-    <node pkg="gmapping" type="slam_gmapping" name="gmapping" required="true" respawn="false" >
+    <node pkg="gmapping" type="slam_gmapping" name="gmapping" respawn="false" >
         <rosparam command="load" file="$(find simple_robot_driving)/config/slam/gmapping_params.yaml" />
         <param name="map_frame" value="world"/>
         <param name="sigma" value="$(arg sigma)" />
