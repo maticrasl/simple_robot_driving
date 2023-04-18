@@ -12,31 +12,32 @@
 
     <!-- SLAM TOOLBOX PARAMS -->
     <!-- General Parameters -->
-    <arg name="minimum_travel_heading" default="0.5" />
-    <arg name="scan_buffer_size" default="10" />
-    <arg name="scan_buffer_maximum_scan_distance" default="10" />
-    <arg name="link_match_minimum_response_fine" default="0.1" />
-    <arg name="link_scan_maximum_distance" default="1.5" />
-    <arg name="loop_search_maximum_distance" default="3.0" />
-    <arg name="loop_match_minimum_chain_size" default="10" />
-    <arg name="loop_match_maximum_variance_coarse" default="3.0" />
-    <arg name="loop_match_minimum_response_coarse" default="0.35" />
-    <arg name="loop_match_minimum_response_fine" default="0.45" />
+    <arg name="minimum_travel_distance" default="#" />
+    <arg name="minimum_travel_heading" default="#" />
+    <arg name="scan_buffer_size" default="#" />
+    <arg name="scan_buffer_maximum_scan_distance" default="#" />
+    <arg name="link_match_minimum_response_fine" default="#" />
+    <arg name="link_scan_maximum_distance" default="#" />
+    <arg name="loop_search_maximum_distance" default="#" />
+    <arg name="loop_match_minimum_chain_size" default="#" />
+    <arg name="loop_match_maximum_variance_coarse" default="#" />
+    <arg name="loop_match_minimum_response_coarse" default="#" />
+    <arg name="loop_match_minimum_response_fine" default="#" />
     
     <!-- Correlation Parameters -->
-    <arg name="correlation_search_space_dimension" default="0.2" />
-    <arg name="correlation_search_space_resolution" default="0.01" />
-    <arg name="correlation_search_space_smear_deviation" default="0.1" />
-    <arg name="loop_search_space_dimension" default="8.0" />
-    <arg name="loop_search_space_resolution" default="0.05" />
-    <arg name="loop_search_space_smear_deviation" default="0.03" />
-    <arg name="distance_variance_penalty" default="0.5" />
-    <arg name="angle_variance_penalty" default="1.0" />
-    <arg name="fine_search_angle_offset" default="0.00349" />
-    <arg name="coarse_search_angle_offset" default="0.349" />
-    <arg name="coarse_angle_resolution" default="0.0349" />
-    <arg name="minimum_angle_penalty" default="0.9" />
-    <arg name="minimum_distance_penalty" default="0.5" />
+    <arg name="correlation_search_space_dimension" default="#" />
+    <arg name="correlation_search_space_resolution" default="#" />
+    <arg name="correlation_search_space_smear_deviation" default="#" />
+    <arg name="loop_search_space_dimension" default="#" />
+    <arg name="loop_search_space_resolution" default="#" />
+    <arg name="loop_search_space_smear_deviation" default="#" />
+    <arg name="distance_variance_penalty" default="#" />
+    <arg name="angle_variance_penalty" default="#" />
+    <arg name="fine_search_angle_offset" default="#" />
+    <arg name="coarse_search_angle_offset" default="#" />
+    <arg name="coarse_angle_resolution" default="#" />
+    <arg name="minimum_angle_penalty" default="#" />
+    <arg name="minimum_distance_penalty" default="#" />
 
     <!-- Parameters -->
     <param name="initial_pos_x" value="$(arg initial_pos_x)" />
