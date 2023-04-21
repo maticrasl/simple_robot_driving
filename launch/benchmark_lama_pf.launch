@@ -64,7 +64,7 @@
     </node>
 
     <!-- Benchmarker -->
-    <node pkg="simple_robot_simulator" type="benchmarker.py" name="benchmarker" output="screen">
+    <node pkg="simple_robot_simulator" type="benchmarker_offline.py" name="benchmarker_offline" output="screen">
         <param name="kitti_path" value="$(arg kitti_path)" />
         <param name="mapfile" value="$(arg mapfile)" />
         <param name="generate_gt" value="$(arg generate_gt)" />
