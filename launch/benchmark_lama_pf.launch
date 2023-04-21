@@ -46,7 +46,7 @@
         <param name="global_frame_id" value="world" />
         <param name="rosbag" value="$(arg rosbag_path)/$(arg mapfile).bag" />
         <param name="initial_pos_x" value="$(arg initial_pos_x)" />
-        <param name="initial_pos_x" value="$(arg initial_pos_x)" />
+        <param name="initial_pos_y" value="$(arg initial_pos_y)" />
         <param name="initial_pos_a" value="$(arg initial_pos_a)" />
         <param name="d_thresh" value="$(arg d_thresh)" />
         <param name="a_thresh" value="$(arg a_thresh)" />
@@ -71,6 +71,6 @@
     </node>
 
     <!-- Rviz -->
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/benchmark_configuration.rviz" output="log"/>
+    <!--<node type="rviz" name="rviz" pkg="rviz" args="-d $(find simple_robot_driving)/rviz/benchmark_configuration.rviz" output="log"/>-->
 
 </launch>
