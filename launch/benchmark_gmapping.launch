@@ -4,7 +4,7 @@
     <arg name="kitti_path" default="/home/matic/Documents/Magistrska/Benchmarking" />
     <arg name="rosbag_path" default="/home/matic/Documents/Magistrska/bagfiles/recordings" />
     <arg name="rosbag_rate" default="25" />
-    <arg name="node_start_delay" default="0.5" />
+    <arg name="node_start_delay" default="0.2" />
     <arg name="initial_pos_x" default="1.25" />
     <arg name="initial_pos_y" default="-1.25" />
     <arg name="initial_pos_a" default="0.0" />
