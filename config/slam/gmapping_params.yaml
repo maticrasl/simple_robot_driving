@@ -33,5 +33,5 @@ llsamplerange: 0.01                 # Consider
 llsamplestep: 0.01                  # Consider
 lasamplerange: 0.005                # Consider
 lasamplestep: 0.005                 # Consider
-transform_publish_period: 0.05      # Consider
+transform_publish_period: 0.02      # Consider
 occ_thresh: 0.25                    # Consider
